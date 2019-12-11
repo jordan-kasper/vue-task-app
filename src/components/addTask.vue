@@ -1,10 +1,22 @@
 <template>
-    <div class="row">
+    <div class="container">
         <form @submit.prevent="submitTask" class="col s6 offset-s3">
-          <div class="input-field">
-            <input v-model="taskValue">
+          <div class="input-field form-group">
+            <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" v-model="taskValue">
           </div>
-          <button>Add</button>
+          <div class="form-group">
+            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                <option selected>Choose...</option>
+                <option value="1">Urgent</option>
+                <option value="2">High</option>
+                <option value="3">Normal</option>
+                <option value="4">Low</option>
+
+            </select>
+          </div>
+          <div class="form-group">
+          <button class="btn btn-primary btn-lg btn-block">Add Task</button>
+          </div>
         </form>
       </div>
 
