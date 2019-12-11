@@ -1,17 +1,12 @@
 <template>
-    <div class="row">
-        <ul>
-          <li class="collection-item" v-for="task in tasks" :key="task">
-            <p>
-              <label>
-                <span>{{task}}</span>
+    <div class="container-fluid">
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" v-for="task in tasks" :key="task">
+                {{task}}
                 <span>
-                  <a @click.prevent="deleteTask(task)">
-                    <i>delete</i>
-                  </a>
+                <a @click.prevent="editTask(task)">Edit</a>
+                <a @click.prevent="deleteTask(task)">Delete</a>
                 </span>
-              </label>
-            </p>
           </li>
         </ul>
       </div>
@@ -23,9 +18,17 @@
 
         methods: {
             deleteTask(task) {
-            const taskIndex = this.tasks.indexOf(task);
-            this.tasks.splice(taskIndex, 1);
+              const taskIndex = this.tasks.indexOf(task);
+              this.tasks.splice(taskIndex, 1);
+            }
         }
     }
-}
+
 </script>
+
+<style scoped>
+  .list-group-item {
+    float: left;
+    padding: 10px;
+}
+</style>

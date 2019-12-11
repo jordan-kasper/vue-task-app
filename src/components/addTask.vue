@@ -2,16 +2,14 @@
     <div class="row">
         <form @submit.prevent="submitTask" class="col s6 offset-s3">
           <div class="input-field">
-            <input v-model="taskValue" id="icon_prefix2">
+            <input v-model="taskValue">
           </div>
           <button>Add</button>
         </form>
       </div>
+
+
 </template>
-
-
-
-
 
 <script>
     export default {
@@ -28,3 +26,9 @@
     }
 }
 </script>
+
+<style scoped>
+  .container-fluid {
+      align-items: center;
+  }
+</style>

@@ -6,7 +6,7 @@
     <app-header></app-header>
     <app-add-task @taskAdded="addNewTask"></app-add-task>
     <app-task-list v-bind:tasks="tasks"></app-task-list>
-
+    <div @click.prevent="deleteAll()"> Delete All </div>
     </div>
   </div>
 </template>
@@ -26,6 +26,9 @@ export default {
   methods: {
     addNewTask(task) {
       this.tasks.push(task);
+    },
+    deleteAll(){
+      this.tasks = []
     }
   },
   components: {
