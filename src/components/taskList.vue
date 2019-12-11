@@ -1,10 +1,9 @@
 <template>
     <div class="container-fluid">
-        <ul class="list-group">
-          <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" v-bind:class="task.taskPriority" v-for="task in tasks" :key="task">
+        <ul class="list-group" v-for="task in tasks" :key="task">
+          <li type="checkbox" class="list-group-item d-flex justify-content-between align-items-center list-group-item-action"  v-bind:class="task.taskPriority">
                 {{task.taskValue}}
                 <span>
-                <a @click.prevent="editTask(task)">Edit</a>
                 <a @click.prevent="deleteTask(task)">Delete</a>
                 </span>
           </li>
@@ -21,8 +20,8 @@
             deleteTask(task) {
               const taskIndex = this.tasks.indexOf(task);
               this.tasks.splice(taskIndex, 1);
-            }
-        }
+            },
+        },
     }
 
 </script>

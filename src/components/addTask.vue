@@ -7,10 +7,9 @@
           <div class="form-group">
             <select class="custom-select my-1 mr-sm-2" v-model="newTask.taskPriority">
                 <option selected>Choose...</option>
-                <option value="list-group-item-danger">Urgent</option>
-                <option value="list-group-item-warning">High</option>
-                <option value="list-group-item-success">Normal</option>
-                <option value="list-group-item-info">Low</option>
+                <option value="list-group-item-danger">Life Changing</option>
+                <option value="list-group-item-warning">Important</option>
+                <option value="list-group-item-success">Meh</option>
             </select>
           </div>
           <div class="form-group">
