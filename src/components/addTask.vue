@@ -2,16 +2,15 @@
     <div class="container">
         <form @submit.prevent="submitTask" class="col s6 offset-s3">
           <div class="input-field form-group">
-            <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" v-model="taskValue">
+            <input class="form-control" v-model="newTask.taskValue" placeholder="Add a Task">
           </div>
           <div class="form-group">
-            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+            <select class="custom-select my-1 mr-sm-2" v-model="newTask.taskPriority">
                 <option selected>Choose...</option>
-                <option value="1">Urgent</option>
-                <option value="2">High</option>
-                <option value="3">Normal</option>
-                <option value="4">Low</option>
-
+                <option value="list-group-item-danger">Urgent</option>
+                <option value="list-group-item-warning">High</option>
+                <option value="list-group-item-success">Normal</option>
+                <option value="list-group-item-info">Low</option>
             </select>
           </div>
           <div class="form-group">
@@ -27,13 +26,16 @@
     export default {
         data() {
             return {
-                taskValue : '',
+                newTask:{
+                    taskValue : '',
+                    taskPriority: '',
+                }
             };
         },
         methods: {
             submitTask() {
-                this.$emit('taskAdded', this.taskValue)
-                this.taskValue = '';
+                this.$emit('taskAdded', this.newTask)
+                this.newTask = {};
             }
     }
 }

@@ -1,8 +1,8 @@
 <template>
     <div class="container-fluid">
         <ul class="list-group">
-          <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" v-for="task in tasks" :key="task">
-                {{task}}
+          <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action" v-bind:class="task.taskPriority" v-for="task in tasks" :key="task">
+                {{task.taskValue}}
                 <span>
                 <a @click.prevent="editTask(task)">Edit</a>
                 <a @click.prevent="deleteTask(task)">Delete</a>
@@ -15,6 +15,7 @@
 <script>
     export default {
         props: ['tasks'],
+
 
         methods: {
             deleteTask(task) {
