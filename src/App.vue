@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="container">
+    <div>
 
     <img alt="Vue logo" src="./assets/logo.png">
     <app-header></app-header>
@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import Header from './components/Header.vue'
-import addTask from './components/addTask.vue'
-import TaskList from './components/taskList.vue'
+import Header from './components/Header.vue';
+import addTask from './components/addTask.vue';
+import TaskList from './components/taskList.vue';
 
 export default {
   name: 'app',
@@ -27,18 +27,17 @@ export default {
     addNewTask(task) {
       this.tasks.push(task);
     },
-    deleteAll(){
-      this.tasks = []
-    }
+    deleteAll() {
+      this.tasks = [];
+    },
   },
   components: {
     appHeader: Header,
     appAddTask: addTask,
-    appTaskList: TaskList
+    appTaskList: TaskList,
   },
   mounted() {
-    if (localStorage.getItem('tasks')) this.tasks = 
-    JSON.parse(localStorage.getItem('tasks'));
+    if (localStorage.getItem('tasks')) { this.tasks = JSON.parse(localStorage.getItem('tasks')); }
   },
   watch: {
     tasks: {
@@ -47,8 +46,8 @@ export default {
       },
       deep: true,
     },
-  }
-}
+  },
+};
 
 </script>
 
