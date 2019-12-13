@@ -1,5 +1,5 @@
 <template>
-  <form class="needs-validation" @submit.prevent="submitTask">
+  <form @submit.prevent="submitTask">
     <div>
       <div>
         <input
@@ -38,6 +38,9 @@ export default {
     };
   },
   methods: {
+    /**
+      * Sends newly created task back to the parent component to be added to the tasks array
+      */
     submitTask() {
       this.$emit('taskAdded', this.newTask);
       this.newTask = {};

@@ -26,6 +26,11 @@ export default {
   props: ['tasks'],
 
   methods: {
+    /**
+      * Removes a task from the tasks
+      *
+      * @param {String} task the task from the ul that is to be removed
+      */
     deleteTask(task) {
       const taskIndex = this.tasks.indexOf(task);
       this.tasks.splice(taskIndex, 1);
