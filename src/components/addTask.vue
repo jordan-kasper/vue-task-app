@@ -16,9 +16,9 @@
       v-model="newTask.taskPriority"
     >
       <option selected>Choose...</option>
-      <option value="list-group-item-danger">Life Changing</option>
-      <option value="list-group-item-warning">Important</option>
-      <option value="list-group-item-success">Meh</option>
+      <option value="1">Life Changing</option>
+      <option value="2">Important</option>
+      <option value="3">Meh</option>
     </select>
     <div>
       <button class="btn btn-primary btn-block spacing">Add Task</button>
@@ -33,6 +33,7 @@ export default {
       newTask: {
         taskValue: '',
         taskPriority: '',
+        isActive: false,
       },
     };
   },
@@ -42,7 +43,11 @@ export default {
      */
     submitTask() {
       this.$emit('taskAdded', this.newTask);
-      this.newTask = {};
+      this.newTask = {
+        taskValue: '',
+        taskPriority: '',
+        isActive: false,
+      };
     },
   },
 };

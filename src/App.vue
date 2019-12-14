@@ -27,16 +27,16 @@ export default {
   },
   methods: {
     /**
-      * Adds task to tasks array
-      *
-      * @param {String} task the task passed from addTask component
-      */
+     * Adds task to tasks array
+     *
+     * @param {String} task the task passed from addTask component
+     */
     addNewTask(task) {
       this.tasks.push(task);
     },
     /**
-      * Removes all tasks from the tasks array
-      */
+     * Removes all tasks from the tasks array
+     */
     deleteAll() {
       this.tasks = [];
     },
