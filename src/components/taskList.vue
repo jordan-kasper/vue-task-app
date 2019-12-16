@@ -4,17 +4,14 @@
     <ul class="list-group" v-for="task in sortArrays(tasks)" :key="task.name">
       <li
         class="list-group-item d-flex justify-content-between"
-        v-bind:class="[
-          taskColor(task.taskPriority),
-          { 'strike-through': task.isActive },
-        ]"
+        v-bind:class="taskColor(task.taskPriority)"
         @click="finishTask(task)"
       >
-        {{ task.taskValue }}
-
+        <span v-bind:class="{ 'strike-through': task.isActive }">{{
+          task.taskValue
+        }}</span>
         <span>
-          <a @click.prevent="deleteTask(task)"
-            >Delete</a>
+          <a @click.prevent="deleteTask(task)">Delete</a>
         </span>
       </li>
     </ul>
