@@ -13,12 +13,8 @@
         {{ task.taskValue }}
 
         <span>
-          <i @click.prevent="deleteTask(task)"
-            ><img alt="Vue logo" class="button-space" src="../assets/edit.png"
-          /></i>
-          <i @click.prevent="deleteTask(task)"
-            ><img alt="Vue logo" src="../assets/delete.png"
-          /></i>
+          <a @click.prevent="deleteTask(task)"
+            >Delete</a>
         </span>
       </li>
     </ul>
@@ -42,6 +38,11 @@ export default {
     sortArrays(arrays) {
       return _.orderBy(arrays, 'taskPriority', 'asc');
     },
+    /**
+     * Changes the color of the task li based on priority
+     *
+     * @param {int} priority the value used to determine the color of the li
+     */
     taskColor(priority) {
       let classColor;
       if (priority === '1') {
@@ -53,6 +54,10 @@ export default {
       }
       return classColor;
     },
+    /**
+     * Sets the userTask value to true or false to toggle the class value strike-through
+     * @param {String} task the task where we are checking the isActive value
+     */
     finishTask(task) {
       const userTask = task;
       userTask.isActive = !userTask.isActive;
