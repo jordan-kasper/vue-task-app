@@ -1,5 +1,0 @@
-{
-    "eslint.run": "onSave",
-    "git.ignoreLimitWarning": true,
-    "vueBeautify.isRootIndent": false
-}
