@@ -6,14 +6,14 @@
         type="text"
         name="task-name"
         class="form-control spacing"
-        v-model="newTask.taskValue"
+        v-model="newTask.value"
         placeholder="Add a Task"
       />
     </div>
     <select
       required
       class="custom-select d-block w-100 spacing"
-      v-model="newTask.taskPriority"
+      v-model="newTask.priority"
     >
       <option selected>Choose...</option>
       <option value="1">Life Changing</option>
@@ -31,9 +31,8 @@ export default {
   data() {
     return {
       newTask: {
-        taskValue: '',
-        taskPriority: '',
-        isActive: false,
+        value: '',
+        priority: '',
       },
     };
   },
@@ -44,9 +43,8 @@ export default {
     submitTask() {
       this.$emit('taskAdded', this.newTask);
       this.newTask = {
-        taskValue: '',
-        taskPriority: '',
-        isActive: false,
+        value: '',
+        priority: '',
       };
     },
   },
