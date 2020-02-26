@@ -1,29 +1,26 @@
 <template>
-  <form @submit.prevent="submitTask">
-    <div>
-      <input
-        required
-        type="text"
-        name="task-name"
-        class="form-control spacing"
-        v-model="newTask.value"
-        placeholder="Add a Task"
-      />
-    </div>
-    <select
-      required
-      class="custom-select d-block w-100 spacing"
-      v-model="newTask.priority"
-    >
-      <option selected>Choose...</option>
-      <option value=1>Life Changing</option>
-      <option value=2>Important</option>
-      <option value=3>Meh</option>
-    </select>
-    <div>
-      <button class="btn btn-primary btn-block spacing">Add Task</button>
-    </div>
-  </form>
+        <b-form inline @submit="submitTask">
+          <label class="sr-only" for="inline-form-input-name">Name</label>
+          <b-input
+            id="inline-form-input-name"
+            class="mb-2 mr-sm-2 mb-sm-0"
+            placeholder="Clean Room"
+            v-model="newTask.task"
+          ></b-input>
+          <b-form-select
+            class="mb-2 mr-sm-2 mb-sm-0"
+            :value="null"
+            :options="{
+              'Life Changing': 'Life Changing',
+              Important: 'Important',
+              Meh: 'Meh',
+            }"
+            id="inline-form-custom-select-pref"
+            v-model="newTask.priority"
+          >
+          </b-form-select>
+          <b-button type="submit" variant="primary">Submit</b-button>
+        </b-form>
 </template>
 
 <script>
@@ -31,8 +28,9 @@ export default {
   data() {
     return {
       newTask: {
-        value: '',
+        task: '',
         priority: '',
+        selected: '',
       },
     };
   },
@@ -43,8 +41,9 @@ export default {
     submitTask() {
       this.$emit('taskAdded', this.newTask);
       this.newTask = {
-        value: '',
+        task: '',
         priority: '',
+        selected: '',
       };
     },
   },

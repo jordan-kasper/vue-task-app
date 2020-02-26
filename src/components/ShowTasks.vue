@@ -1,52 +1,75 @@
 <template>
-  <div>
-    <table>
-      <thead>
-        <tr>
-          <th @click="sort('value')">Task</th>
-          <th @click="sort('priority')">Priority</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="task in sortedTasks" v-bind:key="task">
-          <td>
-            <input
-              contenteditable
-              v-model="task.value"
-              @blur="editTask(task)"
-            />
-          </td>
-
-          <td>
-            <select class="custom-select d-block w-100 spacing">
-              <option selected v-if="task.priority === '1'"
-                >Life Changing</option
-              >
-              <option selected v-if="task.priority === '2'">Important</option>
-              <option selected v-if="task.priority === '3'">Meh</option>
-              <option value="1">Life Changing</option>
-              <option value="2">Important</option>
-              <option value="3">Meh</option>
-            </select>
-          </td>
-          <td><a @click.prevent="deleteTask(task)">Delete</a></td>
-        </tr>
-      </tbody>
-    </table>
-
-    debug: sort={{ currentSort }}, dir={{ currentSortDir }}
+  <div class="tasks">
+    <b-jumbotron header="List of Tasks" lead="List of tasks that need done">
+      <b-table
+        ref="selectableTable"
+        selectable
+        :select-mode="selectMode"
+        :items="tasks"
+        :fields="fields"
+        :sort-by.sync="sortBy"
+        :sort-desc.sync="sortDesc"
+        @row-selected="onRowSelected"
+        responsive="sm"
+      >
+        <!-- Example scoped slot for select state illustrative purposes -->
+        <template v-slot:cell(selected)="{ rowSelected }">
+          <template v-if="rowSelected">
+            <span aria-hidden="true">&check;</span>
+            <span class="sr-only">Selected</span>
+          </template>
+          <template v-else>
+            <span aria-hidden="true">&nbsp;</span>
+            <span class="sr-only">Not selected</span>
+          </template>
+        </template>
+      </b-table>
+      <p>
+        <b-button
+          size="sm"
+          @click="selectAllRows"
+          class="spacing"
+          variant="primary"
+          >Select all</b-button
+        >
+        <b-button
+          size="sm"
+          @click="deleteTask(selected)"
+          class="spacing"
+          variant="danger"
+          >Delete Selected</b-button
+        >
+        <b-button
+          size="sm"
+          @click="deleteAll()"
+          class="spacing"
+          variant="danger"
+          >Delete All</b-button
+        >
+      </p>
+      <p>
+        Selected Rows:<br />
+        {{ selected }}
+      </p>
+    </b-jumbotron>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'showTables',
   props: ['tasks'],
 
   data() {
     return {
-      currentSort: 'name',
-      currentSortDir: 'asc',
+      sortBy: 'priority',
+      sortDesc: false,
+      fields: [
+        { key: 'Selected' },
+        { key: 'task' },
+        { key: 'priority', sortable: true },
+      ],
+      selected: [],
     };
   },
   methods: {
@@ -55,47 +78,36 @@ export default {
      *
      * @param {String} task the task from the ul that is to be removed
      */
-    deleteTask(task) {
-      const taskIndex = this.tasks.indexOf(task);
-      this.tasks.splice(taskIndex, 1);
+    deleteTask(taskList) {
+      taskList.forEach((task) => {
+        const taskIndex = this.tasks.indexOf(task);
+        this.tasks.splice(taskIndex, 1);
+      });
     },
-    sort(s) {
-      if (s === this.currentSort) {
-        this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' : 'asc';
-      }
-      this.currentSort = s;
+    onRowSelected(items) {
+      this.selected = items;
+    },
+    selectAllRows() {
+      this.$refs.selectableTable.selectAllRows();
+    },
+    deleteAll() {
+      this.tasks = [];
     },
   },
-  computed: {
-    sortedTasks() {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      return this.tasks.sort((a, b) => {
-        let modifier = 1;
-        if (this.currentSortDir === 'desc') modifier = -1;
-        if (a[this.currentSort] < b[this.currentSort]) return -1 * modifier;
-        if (a[this.currentSort] > b[this.currentSort]) return 1 * modifier;
-        return 0;
-      });
+  watch: {
+    tasks: {
+      handler() {
+        localStorage.setItem('tasks', JSON.stringify(this.tasks));
+      },
+      deep: true,
     },
   },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-input {
-  border-top-style: hidden;
-  border-right-style: hidden;
-  border-left-style: hidden;
-  border-bottom-style: hidden;
-  background-color: #eee;
-}
-select {
-  border-top-style: hidden;
-  border-right-style: hidden;
-  border-left-style: hidden;
-  border-bottom-style: hidden;
-  padding-left: 0;
-  background-color: #eee;
+.spacing {
+  margin-top: 20px;
+  margin-left: 10px;
 }
 </style>

@@ -1,15 +1,25 @@
 <template>
   <div id="app">
-    <add-task @taskAdded="addNewTask"></add-task>
-    <show-tasks v-bind:tasks="tasks"></show-tasks>
-        <div @click.prevent="deleteAll()">
-      <button>Delete All</button>
-    </div>
+    <b-container>
+      <b-row>
+        <b-col>
+          <b-jumbotron
+            header="Vue Todo App"
+            lead="Bootstrap v4 Components for Vue.js 2"
+          >
+            <p>For more information visit our website</p>
+            <add-task id="add" @taskAdded="addNewTask"></add-task>
+          </b-jumbotron>
+        </b-col>
+        <b-col>
+          <show-tasks v-bind:tasks="tasks"></show-tasks>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
 <script>
-
 import AddTask from './components/addTask.vue';
 import showTasks from './components/showTasks.vue';
 
@@ -29,12 +39,6 @@ export default {
     addNewTask(task) {
       this.tasks.push(task);
     },
-    /**
-     * Removes all tasks from the tasks array
-     */
-    deleteAll() {
-      this.tasks = [];
-    },
   },
   components: {
     showTasks,
@@ -45,16 +49,12 @@ export default {
       this.tasks = JSON.parse(localStorage.getItem('tasks'));
     }
   },
-  watch: {
-    tasks: {
-      handler() {
-        localStorage.setItem('tasks', JSON.stringify(this.tasks));
-      },
-      deep: true,
-    },
-  },
 };
 </script>
 
 <style>
+.add {
+  margin-left: none;
+  padding-left: none;
+}
 </style>
