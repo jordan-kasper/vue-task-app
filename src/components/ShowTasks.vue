@@ -9,7 +9,8 @@
       </thead>
       <tbody>
         <tr v-for="task in sortedTasks" v-bind:key="task">
-          <td>{{ task.value }}</td>
+          <td><input contenteditable v-model=task.value
+          @blur="editTask(task)" ></td>
           <td v-if="task.priority === '1'">Life Changing</td>
           <td v-if="task.priority === '2'">Important</td>
           <td v-if="task.priority === '3'">Meh</td>
@@ -66,4 +67,12 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+input {
+      border-top-style: hidden;
+      border-right-style: hidden;
+      border-left-style: hidden;
+      border-bottom-style: hidden;
+      background-color: #eee;
+      }
+</style>
