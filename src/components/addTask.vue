@@ -16,9 +16,9 @@
       v-model="newTask.priority"
     >
       <option selected>Choose...</option>
-      <option value="Life Changing">Life Changing</option>
-      <option value="Important">Important</option>
-      <option value="Meh">Meh</option>
+      <option value=1>Life Changing</option>
+      <option value=2>Important</option>
+      <option value=3>Meh</option>
     </select>
     <div>
       <button class="btn btn-primary btn-block spacing">Add Task</button>

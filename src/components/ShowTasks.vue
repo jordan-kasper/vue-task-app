@@ -10,7 +10,10 @@
       <tbody>
         <tr v-for="task in sortedTasks" v-bind:key="task">
           <td>{{ task.value }}</td>
-          <td>{{ task.priority }}</td>
+          <td v-if="task.priority === '1'">Life Changing</td>
+          <td v-if="task.priority === '2'">Important</td>
+          <td v-if="task.priority === '3'">Meh</td>
+          <td><a @click.prevent="deleteTask(task)">Delete</a></td>
         </tr>
       </tbody>
     </table>

@@ -2,12 +2,16 @@
   <div id="app">
     <add-task @taskAdded="addNewTask"></add-task>
     <show-tasks v-bind:tasks="tasks"></show-tasks>
+        <div @click.prevent="deleteAll()">
+      <button>Delete All</button>
+    </div>
   </div>
 </template>
 
 <script>
-import ShowTasks from './components/ShowTasks.vue';
-import AddTask from './components/AddTask.vue';
+
+import AddTask from './components/addTask.vue';
+import showTasks from './components/showTasks.vue';
 
 export default {
   name: 'App',
@@ -33,7 +37,7 @@ export default {
     },
   },
   components: {
-    ShowTasks,
+    showTasks,
     AddTask,
   },
 };
