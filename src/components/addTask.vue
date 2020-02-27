@@ -19,7 +19,7 @@
             v-model="newTask.priority"
           >
           </b-form-select>
-          <b-button type="submit" variant="primary">Submit</b-button>
+          <b-button type="submit" variant="info">Submit</b-button>
         </b-form>
 </template>
 

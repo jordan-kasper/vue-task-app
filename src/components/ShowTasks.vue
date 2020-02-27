@@ -5,6 +5,7 @@
         ref="selectableTable"
         selectable
         :select-mode="selectMode"
+        selected-variant="info"
         :items="tasks"
         :fields="fields"
         :sort-by.sync="sortBy"
@@ -18,10 +19,6 @@
             <span aria-hidden="true">&check;</span>
             <span class="sr-only">Selected</span>
           </template>
-          <template v-else>
-            <span aria-hidden="true">&nbsp;</span>
-            <span class="sr-only">Not selected</span>
-          </template>
         </template>
       </b-table>
       <p>
@@ -29,7 +26,7 @@
           size="sm"
           @click="selectAllRows"
           class="spacing"
-          variant="primary"
+          variant="info"
           >Select all</b-button
         >
         <b-button

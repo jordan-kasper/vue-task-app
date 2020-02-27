@@ -1,18 +1,19 @@
 <template>
   <div id="app">
+    <app-header></app-header>
     <b-container>
       <b-row>
         <b-col>
           <b-jumbotron
             header="Vue Todo App"
-            lead="Bootstrap v4 Components for Vue.js 2"
+            lead="A ∂todo app built with Bootstrap v4 and Vue.js"
           >
-            <p>For more information visit our website</p>
-            <add-task id="add" @taskAdded="addNewTask"></add-task>
+            <p>Add a task with a priority below</p>
+            <app-add-task id="add" @taskAdded="addNewTask"></app-add-task>
           </b-jumbotron>
         </b-col>
         <b-col>
-          <show-tasks v-bind:tasks="tasks"></show-tasks>
+          <app-show-tasks v-bind:tasks="tasks"></app-show-tasks>
         </b-col>
       </b-row>
     </b-container>
@@ -20,8 +21,10 @@
 </template>
 
 <script>
-import AddTask from './components/addTask.vue';
+import addTask from './components/addTask.vue';
 import showTasks from './components/showTasks.vue';
+import header from './components/header.vue';
+
 
 export default {
   name: 'App',
@@ -41,8 +44,9 @@ export default {
     },
   },
   components: {
-    showTasks,
-    AddTask,
+    appShowTasks: showTasks,
+    appAddTask: addTask,
+    appHeader: header,
   },
   mounted() {
     if (localStorage.getItem('tasks')) {
