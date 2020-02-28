@@ -6,7 +6,7 @@
         <b-col>
           <b-jumbotron
             header="Vue Todo App"
-            lead="A ∂todo app built with Bootstrap v4 and Vue.js"
+            lead="A todo app built with Bootstrap v4 and Vue.js"
           >
             <p>Add a task with a priority below</p>
             <app-add-task id="add" @taskAdded="addNewTask"></app-add-task>

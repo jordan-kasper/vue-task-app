@@ -1,30 +1,39 @@
 <template>
         <b-form inline @submit="submitTask">
           <label class="sr-only" for="inline-form-input-name">Name</label>
-          <b-input
+          <b-form-input
             id="inline-form-input-name"
             class="mb-2 mr-sm-2 mb-sm-0"
             placeholder="Clean Room"
             v-model="newTask.task"
-          ></b-input>
+          ></b-form-input>
           <b-form-select
             class="mb-2 mr-sm-2 mb-sm-0"
             :value="null"
             :options="{
-              'Life Changing': 'Life Changing',
-              Important: 'Important',
-              Meh: 'Meh',
+              1: 'Life Changing',
+              2: 'Important',
+              3: 'Meh',
             }"
             id="inline-form-custom-select-pref"
             v-model="newTask.priority"
           >
           </b-form-select>
-          <b-button type="submit" variant="info">Submit</b-button>
+          <b-button id="submit-button" type="submit" variant="info">Submit</b-button>
         </b-form>
 </template>
 
 <script>
+import {
+  BFormInput,
+  BForm,
+  BFormSelect,
+  BButton,
+} from 'bootstrap-vue';
+
 export default {
+  name: 'addTask',
+
   data() {
     return {
       newTask: {
@@ -46,6 +55,12 @@ export default {
         selected: '',
       };
     },
+  },
+  components: {
+    BFormInput,
+    BForm,
+    BFormSelect,
+    BButton,
   },
 };
 </script>

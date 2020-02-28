@@ -1,5 +1,5 @@
 <template>
-  <div class="tasks">
+  <div>
     <b-jumbotron header="List of Tasks" lead="List of tasks that need done">
       <b-table
         ref="selectableTable"
@@ -12,13 +12,19 @@
         :sort-desc.sync="sortDesc"
         @row-selected="onRowSelected"
         responsive="sm"
+        :tbody-tr-class="rowClass"
       >
-        <!-- Example scoped slot for select state illustrative purposes -->
         <template v-slot:cell(selected)="{ rowSelected }">
           <template v-if="rowSelected">
             <span aria-hidden="true">&check;</span>
             <span class="sr-only">Selected</span>
           </template>
+        </template>
+
+        <template v-slot:cell(priority)="tasks">
+          <span v-if="tasks.value === '1'">Life Changing</span>
+          <span v-if="tasks.value === '2'">Important</span>
+          <span v-if="tasks.value === '3'">Meh</span>
         </template>
       </b-table>
       <p>
@@ -44,17 +50,19 @@
           >Delete All</b-button
         >
       </p>
-      <p>
-        Selected Rows:<br />
-        {{ selected }}
-      </p>
     </b-jumbotron>
   </div>
 </template>
 
 <script>
+import {
+  BTable,
+  BJumbotron,
+  BButton,
+} from 'bootstrap-vue';
+
 export default {
-  name: 'showTables',
+  name: 'showTasks',
   props: ['tasks'],
 
   data() {
@@ -71,9 +79,9 @@ export default {
   },
   methods: {
     /**
-     * Removes a task from the tasks
+     * Removes a task or tasks from the tasks
      *
-     * @param {String} task the task from the ul that is to be removed
+     * @param {Object} taskList the list of tasks from the table that are to be removed
      */
     deleteTask(taskList) {
       taskList.forEach((task) => {
@@ -90,6 +98,17 @@ export default {
     deleteAll() {
       this.tasks = [];
     },
+    /**
+     * Adds row highlighting depending on priority
+     *
+     * @param {String} item the task from the table that is to be highlighted
+     */
+    // eslint-disable-next-line consistent-return
+    rowClass(item) {
+      if (item.priority === '3') return 'table-success';
+      if (item.priority === '2') return 'table-warning';
+      if (item.priority === '1') return 'table-danger';
+    },
   },
   watch: {
     tasks: {
@@ -99,6 +118,11 @@ export default {
       deep: true,
     },
   },
+  components: {
+    BTable,
+    BJumbotron,
+    BButton,
+  },
 };
 </script>
 
@@ -106,5 +130,12 @@ export default {
 .spacing {
   margin-top: 20px;
   margin-left: 10px;
+}
+input {
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: hidden;
+  background-color: transparent;
 }
 </style>
