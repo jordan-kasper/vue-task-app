@@ -22,7 +22,7 @@
 
 <script>
 import addTask from './components/addTask.vue';
-import showTasks from './components/showTasks.vue';
+import showTasks from './components/ShowTasks.vue';
 import header from './components/header.vue';
 
 

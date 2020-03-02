@@ -22,9 +22,9 @@
         </template>
 
         <template v-slot:cell(priority)="tasks">
-          <span v-if="tasks.value === '1'">Life Changing</span>
-          <span v-if="tasks.value === '2'">Important</span>
-          <span v-if="tasks.value === '3'">Meh</span>
+          <span v-if="tasks.item.priority === 1">Life Changing</span>
+          <span v-if="tasks.item.priority === 2">Important</span>
+          <span v-if="tasks.item.priority === 3">Meh</span>
         </template>
       </b-table>
       <p>
@@ -106,9 +106,9 @@ export default {
      */
     // eslint-disable-next-line consistent-return
     rowClass(item) {
-      if (item.priority === '3') return 'table-success';
-      if (item.priority === '2') return 'table-warning';
-      if (item.priority === '1') return 'table-danger';
+      if (item.priority === 3) return 'table-success';
+      if (item.priority === 2) return 'table-warning';
+      if (item.priority === 1) return 'table-danger';
     },
   },
   watch: {

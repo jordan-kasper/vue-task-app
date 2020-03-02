@@ -1,24 +1,17 @@
 <template>
     <b-form inline @submit="submitTask">
       <label class="sr-only" for="inline-form-input-name">Name</label>
-        <ValidationProvider rules="required" v-slot="{ errors }">
           <b-form-input
             id="inline-form-input-name"
             class="mb-2 mr-sm-2 mb-sm-0"
             placeholder="Clean Room"
             v-model="newTask.task"
           ></b-form-input>
-          <span id="error">{{ errors[0] }}</span>
-        </ValidationProvider>
 
       <b-form-select
         class="mb-2 mr-sm-2 mb-sm-0"
         :value="null"
-        :options="{
-          1: 'Life Changing',
-          2: 'Important',
-          3: 'Meh',
-        }"
+        :options=options
         id="inline-form-custom-select-pref"
         v-model="newTask.priority"
       >
@@ -33,7 +26,6 @@
 import {
   BFormInput, BForm, BFormSelect, BButton,
 } from 'bootstrap-vue';
-import { ValidationProvider } from 'vee-validate';
 
 export default {
   name: 'addTask',
@@ -45,6 +37,11 @@ export default {
         priority: '',
         selected: '',
       },
+      options: [
+        { value: 1, text: 'Life Changing' },
+        { value: 2, text: 'Important' },
+        { value: 3, text: 'Meh' },
+      ],
     };
   },
   methods: {
@@ -65,7 +62,6 @@ export default {
     BForm,
     BFormSelect,
     BButton,
-    ValidationProvider,
   },
 };
 </script>
