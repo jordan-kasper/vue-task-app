@@ -7,7 +7,7 @@
         :select-mode="selectMode"
         selected-variant="info"
         :items="tasks"
-        :fields="fields"
+        :fields="fieldNames"
         :sort-by.sync="sortBy"
         :sort-desc.sync="sortDesc"
         @row-selected="onRowSelected"
@@ -69,12 +69,13 @@ export default {
     return {
       sortBy: 'priority',
       sortDesc: false,
-      fields: [
+      fieldNames: [
         { key: 'Selected' },
         { key: 'task' },
         { key: 'priority', sortable: true },
       ],
       selected: [],
+      selectMode: 'multi',
     };
   },
   methods: {

@@ -1,35 +1,39 @@
 <template>
-        <b-form inline @submit="submitTask">
-          <label class="sr-only" for="inline-form-input-name">Name</label>
+    <b-form inline @submit="submitTask">
+      <label class="sr-only" for="inline-form-input-name">Name</label>
+        <ValidationProvider rules="required" v-slot="{ errors }">
           <b-form-input
             id="inline-form-input-name"
             class="mb-2 mr-sm-2 mb-sm-0"
             placeholder="Clean Room"
             v-model="newTask.task"
           ></b-form-input>
-          <b-form-select
-            class="mb-2 mr-sm-2 mb-sm-0"
-            :value="null"
-            :options="{
-              1: 'Life Changing',
-              2: 'Important',
-              3: 'Meh',
-            }"
-            id="inline-form-custom-select-pref"
-            v-model="newTask.priority"
-          >
-          </b-form-select>
-          <b-button id="submit-button" type="submit" variant="info">Submit</b-button>
-        </b-form>
+          <span id="error">{{ errors[0] }}</span>
+        </ValidationProvider>
+
+      <b-form-select
+        class="mb-2 mr-sm-2 mb-sm-0"
+        :value="null"
+        :options="{
+          1: 'Life Changing',
+          2: 'Important',
+          3: 'Meh',
+        }"
+        id="inline-form-custom-select-pref"
+        v-model="newTask.priority"
+      >
+      </b-form-select>
+      <b-button id="submit-button" type="submit" variant="info"
+        >Submit</b-button
+      >
+    </b-form>
 </template>
 
 <script>
 import {
-  BFormInput,
-  BForm,
-  BFormSelect,
-  BButton,
+  BFormInput, BForm, BFormSelect, BButton,
 } from 'bootstrap-vue';
+import { ValidationProvider } from 'vee-validate';
 
 export default {
   name: 'addTask',
@@ -61,6 +65,7 @@ export default {
     BForm,
     BFormSelect,
     BButton,
+    ValidationProvider,
   },
 };
 </script>
