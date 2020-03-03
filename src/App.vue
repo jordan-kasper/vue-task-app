@@ -61,4 +61,7 @@ export default {
   margin-left: none;
   padding-left: none;
 }
+.jumbotron {
+  background-color: white;
+}
 </style>

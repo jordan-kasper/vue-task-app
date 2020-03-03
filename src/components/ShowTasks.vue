@@ -139,4 +139,7 @@ input {
   border-bottom-style: hidden;
   background-color: transparent;
 }
+.jumbotron {
+  background-color: white;
+}
 </style>
