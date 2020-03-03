@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+// eslint-disable-next-line import/no-unresolved
 import showTasks from '@/components/showTasks.vue';
 
 let wrapper;

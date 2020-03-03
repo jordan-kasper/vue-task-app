@@ -1,25 +1,38 @@
 <template>
-    <b-form inline @submit="submitTask">
-      <label class="sr-only" for="inline-form-input-name">Name</label>
-          <b-form-input
-            id="inline-form-input-name"
-            class="mb-2 mr-sm-2 mb-sm-0"
-            placeholder="Clean Room"
-            v-model="newTask.task"
-          ></b-form-input>
+<div>
+  <b-form inline @submit.prevent="validateBeforeSubmit">
+    <label class="sr-only" for="inline-form-input-name">Name</label>
+    <b-form-input
+      id="inline-form-input-name"
+      class="mb-2 mr-sm-2 mb-sm-0"
+      placeholder="Clean Room"
+      v-model="newTask.task"
+      name="task"
+      v-validate="'required'"
+      :class="{'input': true, 'is-danger': errors.has('task') }"
+    ></b-form-input>
 
-      <b-form-select
-        class="mb-2 mr-sm-2 mb-sm-0"
-        :value="null"
-        :options=options
-        id="inline-form-custom-select-pref"
-        v-model="newTask.priority"
-      >
-      </b-form-select>
-      <b-button id="submit-button" type="submit" variant="info"
-        >Submit</b-button
-      >
-    </b-form>
+    <b-form-select
+      class="mb-2 mr-sm-2 mb-sm-0"
+      :value="null"
+      :options="options"
+      id="inline-form-custom-select-pref"
+      v-model="newTask.priority"
+      name="priority"
+      v-validate="'required'"
+      :class="{'input': true, 'is-danger': errors.has('priority') }"
+    >
+    </b-form-select>
+    <b-button id="submit-button" type="submit" variant="info">Submit</b-button>
+  </b-form>
+
+    <br>
+    <span v-show="errors.has('task')">{{ errors.first('task') }}</span>
+    <br>
+    <br>
+    <span v-show="errors.has('priority')">{{ errors.first('priority') }}</span>
+
+</div>
 </template>
 
 <script>
@@ -55,6 +68,14 @@ export default {
         priority: '',
         selected: '',
       };
+    },
+    validateBeforeSubmit() {
+      this.$validator.validateAll().then((result) => {
+        if (result) {
+          this.errors.clear();
+          this.submitTask();
+        }
+      });
     },
   },
   components: {
