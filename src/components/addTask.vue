@@ -7,9 +7,10 @@
       class="mb-2 mr-sm-2 mb-sm-0"
       placeholder="Clean Room"
       v-model="newTask.task"
-      name="task"
+      name="name"
       v-validate="'required'"
-      :class="{'input': true, 'is-danger': errors.has('task') }"
+      :class="{'input': true, 'is-danger': errors.has('name') }"
+      untouched = resetForm
     ></b-form-input>
 
     <b-form-select
@@ -21,17 +22,19 @@
       name="priority"
       v-validate="'required'"
       :class="{'input': true, 'is-danger': errors.has('priority') }"
+      untouched = resetForm
+
     >
     </b-form-select>
     <b-button id="submit-button" type="submit" variant="info">Submit</b-button>
-  </b-form>
 
+  </b-form>
+  <div v-if="showErrors">
     <br>
-    <span v-show="errors.has('task')">{{ errors.first('task') }}</span>
-    <br>
+    <span v-show="errors.has('name')">{{ errors.first('name') }}</span>
     <br>
     <span v-show="errors.has('priority')">{{ errors.first('priority') }}</span>
-
+  </div>
 </div>
 </template>
 
@@ -39,6 +42,7 @@
 import {
   BFormInput, BForm, BFormSelect, BButton,
 } from 'bootstrap-vue';
+
 
 export default {
   name: 'addTask',
@@ -55,6 +59,7 @@ export default {
         { value: 2, text: 'Important' },
         { value: 3, text: 'Meh' },
       ],
+      showErrors: true,
     };
   },
   methods: {
@@ -72,8 +77,10 @@ export default {
     validateBeforeSubmit() {
       this.$validator.validateAll().then((result) => {
         if (result) {
-          this.errors.clear();
           this.submitTask();
+          this.showErrors = false;
+        } else {
+          this.showErrors = true;
         }
       });
     },
