@@ -1,5 +1,8 @@
 # todo-app
 
+## Link to Demo
+https://lucid-booth-fab2c9.netlify.com/
+
 ## Project setup
 ```
 npm install
