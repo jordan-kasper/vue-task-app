@@ -10,7 +10,7 @@
       name="name"
       v-validate="'required'"
       :class="{'input': true, 'is-danger': errors.has('name') }"
-      untouched = resetForm
+      :state= "inputState"
     ></b-form-input>
 
     <b-form-select
@@ -22,19 +22,12 @@
       name="priority"
       v-validate="'required'"
       :class="{'input': true, 'is-danger': errors.has('priority') }"
-      untouched = resetForm
-
+      :state= "inputState"
     >
     </b-form-select>
     <b-button id="submit-button" type="submit" variant="info">Submit</b-button>
 
   </b-form>
-  <div v-if="showErrors">
-    <br>
-    <span v-show="errors.has('name')">{{ errors.first('name') }}</span>
-    <br>
-    <span v-show="errors.has('priority')">{{ errors.first('priority') }}</span>
-  </div>
 </div>
 </template>
 
@@ -59,7 +52,7 @@ export default {
         { value: 2, text: 'Important' },
         { value: 3, text: 'Meh' },
       ],
-      showErrors: true,
+      inputState: null,
     };
   },
   methods: {
@@ -78,9 +71,9 @@ export default {
       this.$validator.validateAll().then((result) => {
         if (result) {
           this.submitTask();
-          this.showErrors = false;
+          this.inputState = null;
         } else {
-          this.showErrors = true;
+          this.inputState = false;
         }
       });
     },
