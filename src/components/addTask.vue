@@ -12,6 +12,10 @@
       :class="{'input': true, 'is-danger': errors.has('name') }"
       :state= "inputState"
     ></b-form-input>
+    <b-tooltip :disabled="show" :show.sync="showToolTip"
+    target="inline-form-input-name" placement="top">
+      Task Required
+    </b-tooltip>
 
     <b-form-select
       class="mb-2 mr-sm-2 mb-sm-0"
@@ -25,6 +29,11 @@
       :state= "inputState"
     >
     </b-form-select>
+    <b-tooltip :disabled="show" :show.sync="showToolTip"
+    target="inline-form-custom-select-pref" placement="top">
+      Priority Required
+    </b-tooltip>
+
     <b-button id="submit-button" type="submit" variant="info">Submit</b-button>
 
   </b-form>
@@ -53,6 +62,10 @@ export default {
         { value: 3, text: 'Meh' },
       ],
       inputState: null,
+      taskError: null,
+      priorityError: null,
+      show: true,
+      showToolTip: false,
     };
   },
   methods: {
@@ -72,8 +85,12 @@ export default {
         if (result) {
           this.submitTask();
           this.inputState = null;
+          this.show = true;
+          this.showToolTip = false;
         } else {
           this.inputState = false;
+          this.show = false;
+          this.showToolTip = true;
         }
       });
     },
