@@ -24,7 +24,7 @@ This is a vue.js project that was created using vue.js and bootstrap-vue.  It al
 ## Usage
 
 ```
-git clone https://github.com/jordan-kasper/vue-music-app.git (vue-music-app)
+git clone https://github.com/jordan-kasper/vue-task-app.git (vue-todo-app)
 cd vue-music-app
 npm install 
 npm run serve 
@@ -57,8 +57,7 @@ npm run lint
 ## Stack
 
 - vue2
-- axios
-- bootstrap
+- bootstrap-vue
 
 
 ## License
