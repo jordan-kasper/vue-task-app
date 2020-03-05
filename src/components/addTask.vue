@@ -1,19 +1,20 @@
 <template>
 <div>
   <b-form inline @submit.prevent="validateBeforeSubmit">
-    <label class="sr-only" for="inline-form-input-name">Name</label>
+    <label class="sr-only" for="task-name">Name</label>
     <b-form-input
-      id="inline-form-input-name"
+      id="task-name"
       class="mb-2 mr-sm-2 mb-sm-0"
       placeholder="Clean Room"
       v-model="newTask.task"
       name="name"
       v-validate="'required'"
       :class="{'input': true, 'is-danger': errors.has('name') }"
-      :state= "inputState"
+      :state= "taskInputState"
     ></b-form-input>
-    <b-tooltip :disabled="show" :show.sync="showToolTip"
-    target="inline-form-input-name" placement="top">
+
+    <b-tooltip :disabled="taskShow" :show.sync="taskShowToolTip"
+    target="task-name" placement="bottom">
       Task Required
     </b-tooltip>
 
@@ -21,16 +22,16 @@
       class="mb-2 mr-sm-2 mb-sm-0"
       :value="null"
       :options="options"
-      id="inline-form-custom-select-pref"
+      id="priority"
       v-model="newTask.priority"
       name="priority"
       v-validate="'required'"
       :class="{'input': true, 'is-danger': errors.has('priority') }"
-      :state= "inputState"
+      :state= "priorityInputState"
     >
     </b-form-select>
-    <b-tooltip :disabled="show" :show.sync="showToolTip"
-    target="inline-form-custom-select-pref" placement="top">
+    <b-tooltip :disabled="priorityShow" :show.sync="priorityShowToolTip"
+    target="priority" placement="bottom">
       Priority Required
     </b-tooltip>
 
@@ -61,11 +62,14 @@ export default {
         { value: 2, text: 'Important' },
         { value: 3, text: 'Meh' },
       ],
-      inputState: null,
+      priorityInputState: null,
+      taskInputState: null,
       taskError: null,
       priorityError: null,
-      show: true,
-      showToolTip: false,
+      taskShow: true,
+      taskShowToolTip: false,
+      priorityShow: true,
+      priorityShowToolTip: false,
     };
   },
   methods: {
@@ -84,13 +88,27 @@ export default {
       this.$validator.validateAll().then((result) => {
         if (result) {
           this.submitTask();
-          this.inputState = null;
-          this.show = true;
-          this.showToolTip = false;
+          this.taskInputState = null;
+          this.taskIshow = true;
+          this.taskIshowToolTip = false;
+          this.priorityInputState = null;
+          this.priorityShow = true;
+          this.priorityShowToolTip = false;
         } else {
-          this.inputState = false;
-          this.show = false;
-          this.showToolTip = true;
+          this.$validator.validate('name').then((n) => {
+            if (!n) {
+              this.taskInputState = false;
+              this.taskShow = false;
+              this.taskShowToolTip = true;
+            }
+          });
+          this.$validator.validate('priority').then((p) => {
+            if (!p) {
+              this.priorityInputState = false;
+              this.priorityShow = false;
+              this.priorityShowToolTip = true;
+            }
+          });
         }
       });
     },

@@ -11,7 +11,6 @@
         :sort-by.sync="sortBy"
         :sort-desc.sync="sortDesc"
         @row-selected="onRowSelected"
-        responsive="sm"
         :tbody-tr-class="rowClass"
       >
         <template v-slot:cell(selected)="{ rowSelected }">
