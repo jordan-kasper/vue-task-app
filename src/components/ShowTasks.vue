@@ -20,10 +20,19 @@
           </template>
         </template>
 
+        <template v-slot:cell(task)="tasks">
+          <input contenteditable v-model=tasks.item.task>
+        </template>
+
         <template v-slot:cell(priority)="tasks">
-          <span v-if="tasks.item.priority === 1">Life Changing</span>
-          <span v-if="tasks.item.priority === 2">Important</span>
-          <span v-if="tasks.item.priority === 3">Meh</span>
+            <b-form-select size="sm" v-model="tasks.item.priority">
+              <option selected v-if="tasks.item.priority === 1">Life Changing</option>
+              <option selected v-if="tasks.item.priority === 2">Important</option>
+              <option selected v-if="tasks.item.priority === 1">Meh</option>
+              <option value=1>Life Changing</option>
+              <option value=2>Important</option>
+              <option value=3>Meh</option>
+            </b-form-select>
         </template>
       </b-table>
       <p>
@@ -58,6 +67,7 @@ import {
   BTable,
   BJumbotron,
   BButton,
+  BFormSelect,
 } from 'bootstrap-vue';
 
 export default {
@@ -105,9 +115,9 @@ export default {
      */
     // eslint-disable-next-line consistent-return
     rowClass(item) {
-      if (item.priority === 3) return 'table-success';
-      if (item.priority === 2) return 'table-warning';
-      if (item.priority === 1) return 'table-danger';
+      if (item.priority === '3') return 'table-success';
+      if (item.priority === '2') return 'table-warning';
+      if (item.priority === '1') return 'table-danger';
     },
   },
   watch: {
@@ -122,6 +132,7 @@ export default {
     BTable,
     BJumbotron,
     BButton,
+    BFormSelect,
   },
 };
 </script>

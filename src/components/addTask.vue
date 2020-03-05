@@ -58,9 +58,9 @@ export default {
         selected: '',
       },
       options: [
-        { value: 1, text: 'Life Changing' },
-        { value: 2, text: 'Important' },
-        { value: 3, text: 'Meh' },
+        { value: '1', text: 'Life Changing' },
+        { value: '2', text: 'Important' },
+        { value: '3', text: 'Meh' },
       ],
       priorityInputState: null,
       taskInputState: null,
