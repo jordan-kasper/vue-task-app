@@ -88,13 +88,9 @@ export default {
       this.$validator.validateAll().then((result) => {
         if (result) {
           this.submitTask();
-          this.taskInputState = null;
-          this.taskIshow = true;
-          this.taskIshowToolTip = false;
-          this.priorityInputState = null;
-          this.priorityShow = true;
-          this.priorityShowToolTip = false;
+          this.clearValidation();
         } else {
+          this.clearValidation();
           this.$validator.validate('name').then((n) => {
             if (!n) {
               this.taskInputState = false;
@@ -111,6 +107,14 @@ export default {
           });
         }
       });
+    },
+    clearValidation() {
+      this.taskInputState = null;
+      this.taskIshow = true;
+      this.taskIshowToolTip = false;
+      this.priorityInputState = null;
+      this.priorityShow = true;
+      this.priorityShowToolTip = false;
     },
   },
   components: {
