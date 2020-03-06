@@ -14,7 +14,7 @@
         :tbody-tr-class="rowClass"
       >
         <template v-slot:cell(selected)="{ rowSelected }">
-          <template v-if="rowSelected">
+          <template v-if="rowSelected" :class="test">
             <span aria-hidden="true">&check;</span>
             <span class="sr-only">Selected</span>
           </template>
@@ -48,6 +48,7 @@
           @click="deleteTask(selected)"
           class="spacing"
           variant="danger"
+          data-cy="deleteSelected"
           >Delete Selected</b-button
         >
         <b-button
@@ -55,6 +56,7 @@
           @click="deleteAll()"
           class="spacing"
           variant="danger"
+          data-cy="deleteAll"
           >Delete All</b-button
         >
       </p>

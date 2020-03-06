@@ -11,6 +11,7 @@
       v-validate="'required'"
       :class="{'input': true, 'is-danger': errors.has('name') }"
       :state= "taskInputState"
+      data-cy= "name"
     ></b-form-input>
 
     <b-tooltip :disabled="taskShow" :show.sync="taskShowToolTip"
@@ -28,6 +29,8 @@
       v-validate="'required'"
       :class="{'input': true, 'is-danger': errors.has('priority') }"
       :state= "priorityInputState"
+      data-cy= "priority"
+
     >
     </b-form-select>
     <b-tooltip :disabled="priorityShow" :show.sync="priorityShowToolTip"
@@ -35,7 +38,7 @@
       Priority Required
     </b-tooltip>
 
-    <b-button id="submit-button" type="submit" variant="info">Submit</b-button>
+    <b-button id="submit-button" type="submit" variant="info" data-cy="submit">Submit</b-button>
 
   </b-form>
 </div>
