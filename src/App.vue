@@ -13,7 +13,7 @@
           </b-jumbotron>
         </b-col>
         <b-col>
-          <app-show-tasks v-bind:tasks="tasks"></app-show-tasks>
+          <app-show-tasks @listDeleted="clearList" v-bind:tasks="tasks"></app-show-tasks>
         </b-col>
       </b-row>
     </b-container>
@@ -42,7 +42,12 @@ export default {
     addNewTask(task) {
       this.tasks.push(task);
     },
+    clearList() {
+      this.tasks = [];
+    },
   },
+
+
   components: {
     appShowTasks: showTasks,
     appAddTask: addTask,

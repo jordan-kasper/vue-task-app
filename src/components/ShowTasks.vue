@@ -108,7 +108,7 @@ export default {
       this.$refs.selectableTable.selectAllRows();
     },
     deleteAll() {
-      this.tasks = [];
+      this.$emit('listDeleted');
     },
     /**
      * Adds row highlighting depending on priority
